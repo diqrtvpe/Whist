@@ -46,9 +46,34 @@ var card = function(id) {
 var cardIds = ["2C","3C","4C","5C","6C","7C",'8C','9C','10C','JC','QC','KC','AC',"2D","3D","4D","5D","6D","7D",'8D','9D','10D','JD','QD','KD','AD',"2H","3H","4H","5H","6H","7H",'8H','9H','10H','JH','QH','KH','AH',"2S","3S","4S","5S","6S","7S",'8S','9S','10S','JS','QS','KS','AS'];
 var cards = cardIds.map(function(x) {card(x);});
 
-function randCard() {
+function deal(num,rand) {
+    var card = this[num];
+    if (num == this.length) {
+	stop("This card doesn't exist");
+    }
+    this.splice(num,1);
+    return(card);
+}
+
+//TODO rewrite by making cardsAvailable part of the global shared state
+function refillCards() {
+    cardsAvailable = cards.slice(0);
+    cardsAvailable.deal=deal;
+    players.forEach(function(x) {x.hand = [];});
+};
+
+function newCard() {
     var numCards = cardsAvailable.length;
-    return Math.floor(Math.random() * numCards) +1;
+    var rand = Math.random();
+    return cardsAvailable.deal(Math.floor(rand * numCards));
+}
+
+function dealCards(num) {
+    for (var i = 0; i < num; i++) {
+	for (var j = 0; j < numPlayers; j++) {
+	    players[j].hand.push(newCard());
+	}
+    }
 }
 
 function startGame() {
@@ -61,6 +86,63 @@ function startGame() {
 }
 
 function startRound() {
-    cardsAvailable = cards.slice(0);
-    
+    refillCards();
+    trump = false;
+    switch(round) {
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+	dealCards(round);
+	trump = newCard();
+	showHands();
+	showTrump();
+	startBidding();
+	//GUI stuff to show cards and trump, and start bidding
+	break;
+    case 8:
+	dealCards(7);
+	trump = newCard();
+	showHands();
+	startBidding();
+	showTrump();
+	//GUI stuff to show cards and start bidding, and show trump afterwards (use events)
+	break;
+    case 9:
+	dealCards(7);
+	trump = newCard();
+	startBidding();
+	showHands();
+	showTrump();
+	//GUI stuff to start bidding, and show cards and trump afterwards (use events)
+    case 10:
+	dealCards(7);
+	trump = newCard();
+	Misere();
+	//MISERE
+	break;
+    case 11:
+	dealCards(7);
+	showHands();
+	startBidding();
+	//No Trump
+	break;
+    case 12:
+    case 13:
+    case 14:
+    case 15:
+    case 16:
+    case 17:
+    case 18:
+	dealCards(19-round);
+	trump = newCard();
+	showHands();
+	showTrump();
+	startBidding();
+	//GUI stuff to show cards and trump, and start bidding
+	break;
+    }
 }
