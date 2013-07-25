@@ -68,7 +68,7 @@ function showParticipants() {
     }
     retVal += '<li>' + participant.person.displayName + '</li>';
   }
-
+  retVal += location.host;
   retVal += '</ul>';
 
   var div = document.getElementById('participantsDiv');
