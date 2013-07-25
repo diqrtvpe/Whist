@@ -1,3 +1,5 @@
+/* Based on the example of CAH, I need to change this a little bit. I should follow its example of using the shared state with the sendEvent function. Use a startGame function to set the dealer and deal the cards, with the onStateChanged function checking that the */
+
 var gameStarted = false;
 var numPlayers=0;
 var round = 0;
@@ -55,7 +57,6 @@ function deal(num,rand) {
     return(card);
 }
 
-//TODO rewrite by making cardsAvailable part of the global shared state
 function refillCards() {
     cardsAvailable = cards.slice(0);
     cardsAvailable.deal=deal;
@@ -101,7 +102,6 @@ function startRound() {
 	showHands();
 	showTrump();
 	startBidding();
-	//GUI stuff to show cards and trump, and start bidding
 	break;
     case 8:
 	dealCards(7);
@@ -109,7 +109,6 @@ function startRound() {
 	showHands();
 	startBidding();
 	showTrump();
-	//GUI stuff to show cards and start bidding, and show trump afterwards (use events)
 	break;
     case 9:
 	dealCards(7);
@@ -117,7 +116,7 @@ function startRound() {
 	startBidding();
 	showHands();
 	showTrump();
-	//GUI stuff to start bidding, and show cards and trump afterwards (use events)
+	break;
     case 10:
 	dealCards(7);
 	trump = newCard();

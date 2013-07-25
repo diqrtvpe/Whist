@@ -19,12 +19,14 @@ players.add = function(part) {
 
 var gameState = function(round) {
     this.round = round;
+    this.dealer = false;
     this.trump = false;
+    this.activePlayer = false;
     this.bids = [];
     this.scores = [];
-    this.cardsAvailable = [];
     this.tricks = [];
     this.currTrick = [];
+    this.hands = {};
 };
 
 var game = [];
