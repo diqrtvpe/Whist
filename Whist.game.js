@@ -79,9 +79,11 @@ function dealCards(num) {
 
 function startGame() {
     if (!gameStarted) {
+	
 	numPlayers=players.length;
 	dealer=Math.floor(Math.random() * numPlayers) +1;
 	round = 1;
+	// Update the shared game state
 	// Put some GUI stuff in here once it's done
     }
 }

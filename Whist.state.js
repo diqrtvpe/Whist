@@ -26,7 +26,6 @@ var gameState = function(round) {
     this.scores = [];
     this.tricks = [];
     this.currTrick = [];
-    this.hands = {};
 };
 
 var game = [];

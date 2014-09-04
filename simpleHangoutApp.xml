@@ -53,6 +53,7 @@
 <hr>
 
 <p><a href="http://developers.google.com/+/hangouts/getting-started">Read the docs</a> to learn more about developing hangouts!</a></p>
+<camvas id="test" width="200" height="400"></canvas>
 
 <script>
 function showParticipants() {
@@ -75,6 +76,18 @@ function showParticipants() {
 
   div.innerHTML = retVal;
 }
+
+function draw(){
+var canvas = document.getElementById("test");
+        if (canvas.getContext) {
+          var ctx = canvas.getContext("2d");
+          var img = new Image();
+          img.src = "http://www.totalnonsense.com/ks.svg";
+          img.onload = function(){
+            ctx.drawImage(img,0,0,127,180);
+          };
+        }
+      }
 
 function init() {
   // When API is ready...                                                         
