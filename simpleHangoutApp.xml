@@ -60,10 +60,6 @@ function showParticipants() {
   var participants = gapi.hangout.getParticipants();
 
   var retVal = '<p>Participants: </p><ul>';
-  
-  var vcsiz = getVideoCanvas().getSize();
-  var vcw = vcsiz.width;
-  var vch = vcsiz.height;
 
   for (var index in participants) {
     var participant = participants[index];
@@ -71,7 +67,7 @@ function showParticipants() {
     if (!participant.person) {
       retVal += '<li>A participant not running this app</li>';
     }
-    retVal += '<li>' + vcw + " " vch + " " + participant.person.displayName + '</li>';
+    retVal += '<li>' + participant.person.displayName + '</li>';
   }
   retVal += location.host;
   retVal += '</ul>';
